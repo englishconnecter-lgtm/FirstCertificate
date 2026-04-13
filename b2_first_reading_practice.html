@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B2 First — Reading & Use of English Practice Test</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f3f1f8;
+  --surface: #fdfcff;
+  --surface2: #edeaf5;
+  --ink: #1a1828;
+  --ink-soft: #424060;
+  --ink-muted: #807e9a;
+  --border: #d4d0e8;
+  --border-light: #e8e6f4;
+  --accent: #4a3aaa;
+  --accent-dark: #32288a;
+  --accent-light: #eeeafc;
+  --teal: #1a5a6a;
+  --teal-light: #e0eef4;
+  --red: #7a1a2a;
+  --red-light: #fce8ea;
+  --green: #1a4a2a;
+  --green-light: #e4f4e8;
+  --amber: #6a4a0a;
+  --amber-light: #faf0d8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Outfit', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; font-size: 15px; line-height: 1.65; }
+
+/* ── HEADER ── */
+.site-header { background: #1a1828; padding: 1.75rem 2rem 1.5rem; border-bottom: 3px solid var(--accent); }
+.site-header-inner { max-width: 1160px; margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.header-title-group h1 { font-family: 'Source Serif 4', serif; font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 600; color: #fdfcff; line-height: 1.2; margin-bottom: 3px; }
+.header-title-group p { font-size: 11px; color: #908eaa; letter-spacing: 0.14em; text-transform: uppercase; }
+.hbox { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.14); border-radius: 10px; padding: 0.65rem 1.1rem; text-align: center; }
+.hlabel { font-size: 10px; color: #908eaa; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 2px; }
+.hval { font-family: 'DM Mono', monospace; font-size: 1.3rem; font-weight: 500; color: #fdfcff; }
+.hval.lg { font-size: 1.55rem; }
+.hval.warning { color: #f59e0b; }
+.hval.danger { color: #ef4444; }
+
+/* ── PART TABS ── */
+.part-tabs { background: #1a1828; border-bottom: 1px solid #2a2840; padding: 0 2rem; }
+.part-tabs-inner { max-width: 1160px; margin: 0 auto; display: flex; overflow-x: auto; scrollbar-width: none; }
+.part-tabs-inner::-webkit-scrollbar { display: none; }
+.ptab { padding: 0.8rem 1.1rem; border: none; background: transparent; cursor: pointer; font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 500; color: #605e7a; border-bottom: 3px solid transparent; white-space: nowrap; transition: all 0.2s; }
+.ptab:hover { color: #b0aed0; }
+.ptab.active { color: #fdfcff; border-bottom-color: var(--accent); }
+
+/* ── LAYOUT ── */
+.main-wrap { max-width: 1160px; margin: 0 auto; padding: 1.75rem 1.5rem 4rem; }
+
+/* ── SECTION ── */
+.q-section { display: none; animation: fadeIn 0.2s ease; }
+.q-section.active { display: block; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:translateY(0); } }
+
+/* ── TEXT PASSAGE ── */
+.passage-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem 1.6rem; margin-bottom: 1.5rem; font-family: 'Source Serif 4', serif; font-size: 14px; line-height: 1.95; color: var(--ink-soft); }
+.passage-card h3 { font-size: 1.05rem; font-weight: 600; color: var(--ink); margin-bottom: 1rem; font-family: 'Source Serif 4', serif; }
+.passage-card p { margin-bottom: 0.9rem; }
+.passage-card p:last-child { margin-bottom: 0; }
+.gap-num { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; color: var(--accent); background: var(--accent-light); padding: 1px 6px; border-radius: 4px; }
+
+/* ── Q BLOCK ── */
+.q-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 1.25rem; overflow: hidden; }
+.q-block-header { background: var(--surface2); padding: 0.85rem 1.25rem; border-bottom: 1px solid var(--border); }
+.q-block-title { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.q-block-subtitle { font-size: 12.5px; color: var(--ink-muted); margin-top: 3px; line-height: 1.5; }
+.q-block-body { padding: 1.1rem 1.25rem; }
+
+/* ── QUESTION ITEM ── */
+.question-item { margin-bottom: 1.1rem; padding-bottom: 1.1rem; border-bottom: 1px solid var(--border-light); }
+.question-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.q-number { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 5px; }
+.q-text { font-size: 13.5px; color: var(--ink); line-height: 1.6; margin-bottom: 0.75rem; }
+
+/* ── MCQ ── */
+.mcq-options { display: flex; flex-direction: column; gap: 6px; }
+.mcq-opt { display: flex; align-items: flex-start; gap: 10px; padding: 8px 12px; border: 1.5px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 13px; color: var(--ink); line-height: 1.5; transition: all 0.15s; background: transparent; text-align: left; font-family: 'Outfit', sans-serif; width: 100%; }
+.mcq-opt:hover:not(:disabled) { background: var(--surface2); border-color: var(--accent); }
+.mcq-opt:disabled { cursor: default; }
+.opt-letter { font-size: 10px; font-weight: 600; min-width: 20px; height: 20px; border-radius: 50%; background: var(--surface2); color: var(--ink-muted); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.mcq-opt.correct { background: var(--green-light); border-color: var(--green); color: #1a4a1a; }
+.mcq-opt.wrong { background: var(--red-light); border-color: var(--red); color: var(--red); }
+.mcq-opt.correct .opt-letter { background: var(--green); color: white; }
+.mcq-opt.wrong .opt-letter { background: var(--red); color: white; }
+.q-feedback { margin-top: 6px; padding: 7px 10px; border-radius: 6px; font-size: 12px; line-height: 1.5; display: none; }
+.q-feedback.show { display: block; }
+.q-feedback.correct { background: var(--green-light); color: var(--green); }
+.q-feedback.wrong { background: var(--red-light); color: var(--red); }
+
+/* ── OPEN CLOZE INPUT ── */
+.inline-gap { display: inline-flex; align-items: center; vertical-align: middle; margin: 0 2px; }
+.inline-input { border: none; border-bottom: 2px solid var(--border); background: transparent; font-family: 'Outfit', sans-serif; font-size: 14px; color: var(--ink); outline: none; width: 110px; padding: 1px 4px; transition: border-color 0.2s; }
+.inline-input:focus { border-bottom-color: var(--accent); }
+.inline-input.correct { border-bottom-color: var(--green); color: var(--green); }
+.inline-input.wrong { border-bottom-color: var(--red); color: var(--red); }
+.answer-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.reveal-btn { padding: 6px 16px; border: 1.5px solid var(--border); border-radius: 7px; background: transparent; font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 500; color: var(--ink-muted); cursor: pointer; transition: all 0.15s; }
+.reveal-btn:hover { background: var(--surface2); color: var(--ink); }
+.correct-badge { font-size: 11px; font-weight: 600; color: var(--green); background: var(--green-light); padding: 3px 10px; border-radius: 12px; display: none; }
+.wrong-badge { font-size: 11px; color: var(--red); background: var(--red-light); padding: 3px 10px; border-radius: 12px; display: none; }
+.answer-reveal { font-size: 12px; font-weight: 600; color: var(--teal); background: var(--teal-light); padding: 3px 10px; border-radius: 12px; display: none; }
+
+/* ── WORD FORMATION ── */
+.wf-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 0.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-light); }
+.wf-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.wf-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--ink-muted); min-width: 22px; }
+.wf-sentence { font-size: 13.5px; color: var(--ink); line-height: 1.65; flex: 1; }
+.wf-root { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent); background: var(--accent-light); padding: 2px 8px; border-radius: 5px; white-space: nowrap; }
+
+/* ── KEY WORD TRANSFORMATION ── */
+.kw-item { margin-bottom: 1.1rem; padding-bottom: 1.1rem; border-bottom: 1px solid var(--border-light); }
+.kw-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.kw-q-num { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 5px; }
+.kw-sentence1 { font-size: 13.5px; color: var(--ink); line-height: 1.65; margin-bottom: 6px; }
+.kw-keyword { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; background: var(--amber-light); color: var(--amber); padding: 2px 8px; border-radius: 5px; display: inline-block; margin-bottom: 8px; }
+.kw-sentence2 { font-size: 13.5px; color: var(--ink); line-height: 1.9; }
+.kw-input { border: none; border-bottom: 2px solid var(--border); background: transparent; font-family: 'Outfit', sans-serif; font-size: 13.5px; color: var(--ink); outline: none; min-width: 180px; max-width: 280px; width: 100%; padding: 1px 4px; transition: border-color 0.2s; }
+.kw-input:focus { border-bottom-color: var(--accent); }
+.kw-input.correct { border-bottom-color: var(--green); color: var(--green); }
+.kw-input.wrong { border-bottom-color: var(--red); color: var(--red); }
+
+/* ── GAPPED TEXT ── */
+.gap-placeholder { display: inline-block; background: var(--accent-light); border: 1.5px dashed var(--accent); border-radius: 6px; padding: 2px 12px; font-size: 13px; color: var(--ink-muted); cursor: default; margin: 0 2px; vertical-align: middle; font-family: 'DM Mono', monospace; }
+.gap-placeholder.filled { background: var(--green-light); border-color: var(--green); color: var(--green); font-family: 'Source Serif 4', serif; font-size: 13px; font-style: italic; }
+.gap-placeholder.wrong-fill { background: var(--red-light); border-color: var(--red); color: var(--red); }
+.sentence-bank { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1rem; }
+.sentence-bank-title { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 0.75rem; }
+.match-dropdown { appearance: none; -webkit-appearance: none; border: 1.5px solid var(--border); border-radius: 7px; padding: 5px 28px 5px 10px; font-family: 'Outfit', sans-serif; font-size: 13px; color: var(--ink); background: var(--bg); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23807e9a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 8px center; cursor: pointer; outline: none; transition: border-color 0.2s; min-width: 70px; }
+.match-dropdown:focus { border-color: var(--accent); }
+.match-dropdown.correct { border-color: var(--green); background-color: var(--green-light); color: var(--green); }
+.match-dropdown.wrong { border-color: var(--red); background-color: var(--red-light); color: var(--red); }
+
+/* ── MULTIPLE MATCHING ── */
+.mm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media (max-width: 640px) { .mm-grid { grid-template-columns: 1fr; } }
+.mm-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 0.75rem 1rem; }
+.mm-q { font-size: 13px; color: var(--ink); line-height: 1.5; margin-bottom: 6px; }
+.mm-q strong { font-weight: 500; color: var(--accent); }
+.person-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.25rem; }
+@media (max-width: 640px) { .person-cards { grid-template-columns: 1fr; } }
+.person-card { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.person-card-header { background: var(--accent); padding: 0.6rem 1rem; }
+.person-card-name { font-size: 13px; font-weight: 600; color: white; }
+.person-card-body { padding: 0.9rem 1rem; font-size: 12.5px; color: var(--ink-soft); line-height: 1.7; font-family: 'Source Serif 4', serif; }
+
+/* ── SCORE BAR ── */
+.section-score { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 0.9rem 1.25rem; margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.section-score-label { font-size: 12px; color: var(--ink-muted); font-weight: 500; }
+.section-score-bar { flex: 1; min-width: 80px; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.section-score-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.5s; width: 0%; }
+.section-score-num { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--accent); font-weight: 500; }
+
+.check-all-btn { width: 100%; padding: 9px; border: 1.5px solid var(--accent); border-radius: 8px; background: var(--accent); color: white; font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 0.75rem; transition: all 0.15s; }
+.check-all-btn:hover { background: var(--accent-dark); }
+
+footer { text-align: center; padding: 2rem; font-size: 11px; color: var(--ink-muted); letter-spacing: 0.05em; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="header-title-group">
+      <h1>B2 First — Reading &amp; Use of English</h1>
+      <p>Practice Test · Parts 1–7 · 52 Questions</p>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <div class="hbox" style="min-width:110px;">
+        <div class="hlabel">Score</div>
+        <div class="hval" id="global-score">0 / 52</div>
+      </div>
+      <div class="hbox">
+        <div class="hlabel">Time Remaining</div>
+        <div class="hval lg" id="timer">75:00</div>
+      </div>
+      <button onclick="resetTest()" style="padding:8px 14px;border:1px solid rgba(255,255,255,0.2);border-radius:8px;background:transparent;color:#908eaa;font-family:'Outfit',sans-serif;font-size:11px;font-weight:500;cursor:pointer;letter-spacing:0.06em;text-transform:uppercase;transition:all 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.08)';this.style.color='#fdfcff'" onmouseout="this.style.background='transparent';this.style.color='#908eaa'">↺ Reset</button>
+    </div>
+  </div>
+</header>
+
+<nav class="part-tabs">
+  <div class="part-tabs-inner">
+    <button class="ptab active" onclick="showPart('p1',this)">Part 1 · Cloze</button>
+    <button class="ptab" onclick="showPart('p2',this)">Part 2 · Open Cloze</button>
+    <button class="ptab" onclick="showPart('p3',this)">Part 3 · Word Formation</button>
+    <button class="ptab" onclick="showPart('p4',this)">Part 4 · Key Word</button>
+    <button class="ptab" onclick="showPart('p5',this)">Part 5 · Multiple Choice</button>
+    <button class="ptab" onclick="showPart('p6',this)">Part 6 · Gapped Text</button>
+    <button class="ptab" onclick="showPart('p7',this)">Part 7 · Matching</button>
+  </div>
+</nav>
+
+<div class="main-wrap">
+
+  <!-- ═══ PART 1 ═══ -->
+  <div class="q-section active" id="p1">
+    <div class="section-score">
+      <span class="section-score-label">Part 1 · Multiple-choice cloze · Questions 1–8</span>
+      <div class="section-score-bar"><div class="section-score-fill" id="p1-bar"></div></div>
+      <span class="section-score-num" id="p1-score">0 / 8</span>
+    </div>
+    <div class="q-block">
+      <div class="q-block-header">
+        <div class="q-block-title">Part 1 — Multiple-choice cloze</div>
+        <div class="q-block-subtitle">Read the text and choose the answer (A, B, C or D) that best fits each gap.</div>
+      </div>
+      <div class="q-block-body">
+        <div class="passage-card">
+          <h3>Why people keep houseplants</h3>
+          <p>In recent years, houseplants have become extremely popular. For some people, this is simply because they look attractive and can make a room feel more welcoming. For others, however, the appeal goes much deeper. Keeping plants indoors can create a sense of routine and responsibility, especially for people whose daily lives may otherwise feel rather busy or disorganised.</p>
+          <p>One reason for their popularity is that they are often seen as an easy way to bring nature into modern homes. In large cities, many people have little <span class="gap-num">(1)</span> to gardens or green spaces, so even a few plants on a windowsill can make a difference. Social media has also played a part, with users sharing photos and advice that have <span class="gap-num">(2)</span> others to start collections of their own.</p>
+          <p>Of course, not everyone finds houseplants easy to care for. Some require careful attention, and beginners may feel <span class="gap-num">(3)</span> when a plant begins to lose leaves or turn brown. Yet experienced plant owners point out that mistakes are a normal part of the learning process. In fact, many say they only became confident after several failed <span class="gap-num">(4)</span>.</p>
+          <p>There is also evidence that looking after plants can be relaxing. Watering them, cleaning their leaves and checking their growth can encourage people to slow down and <span class="gap-num">(5)</span> attention to small changes. This can be particularly valuable at a time when so many people spend hours looking at screens and dealing with constant distractions.</p>
+          <p>Whether people keep one small cactus or turn an entire flat into an indoor garden, houseplants offer more than decoration. They can provide pleasure, challenge and even a sense of achievement. It is perhaps no surprise, then, that this trend has continued to <span class="gap-num">(6)</span>. What began for many as a fashionable hobby has now become a lasting <span class="gap-num">(7)</span> of everyday life. And as people continue searching for simple ways to improve their homes and wellbeing, plants are likely to <span class="gap-num">(8)</span> a popular choice.</p>
+        </div>
+        <div id="p1-questions"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PART 2 ═══ -->
+  <div class="q-section" id="p2">
+    <div class="section-score">
+      <span class="section-score-label">Part 2 · Open cloze · Questions 9–16</span>
+      <div class="section-score-bar"><div class="section-score-fill" id="p2-bar"></div></div>
+      <span class="section-score-num" id="p2-score">0 / 8</span>
+    </div>
+    <div class="q-block">
+      <div class="q-block-header">
+        <div class="q-block-title">Part 2 — Open cloze</div>
+        <div class="q-block-subtitle">Think of the word which best fits each gap. Use only ONE word in each gap. Then click Check.</div>
+      </div>
+      <div class="q-block-body" id="p2-body"></div>
+    </div>
+  </div>
+
+  <!-- ═══ PART 3 ═══ -->
+  <div class="q-section" id="p3">
+    <div class="section-score">
+      <span class="section-score-label">Part 3 · Word formation · Questions 17–24</span>
+      <div class="section-score-bar"><div class="section-score-fill" id="p3-bar"></div></div>
+      <span class="section-score-num" id="p3-score">0 / 8</span>
+    </div>
+    <div class="q-block">
+      <div class="q-block-header">
+        <div class="q-block-title">Part 3 — Word formation</div>
+        <div class="q-block-subtitle">Use the word in CAPITALS to form a word that fits each gap. Then click Check.</div>
+      </div>
+      <div class="q-block-body" id="p3-body"></div>
+    </div>
+  </div>
+
+  <!-- ═══ PART 4 ═══ -->
+  <div class="q-section" id="p4">
+    <div class="section-score">
+      <span class="section-score-label">Part 4 · Key word transformations · Questions 25–30</span>
+      <div class="section-score-bar"><div class="section-score-fill" id="p4-bar"></div></div>
+      <span class="section-score-num" id="p4-score">0 / 6</span>
+    </div>
+    <div class="q-block">
+      <div class="q-block-header">
+        <div class="q-block-title">Part 4 — Key word transformations</div>
+        <div class="q-block-subtitle">Complete the second sentence using 2–5 words including the key word. Do not change the key word.</div>
+      </div>
+      <div class="q-block-body" id="p4-body"></div>
+    </div>
+  </div>
+
+  <!-- ═══ PART 5 ═══ -->
+  <div class="q-section" id="p5">
+    <div class="section-score">
+      <span class="section-score-label">Part 5 · Multiple choice · Questions 31–36</span>
+      <div class="section-score-bar"><div class="section-score-fill" id="p5-bar"></div></div>
+      <span class="section-score-num" id="p5-score">0 / 6</span>
+    </div>
+    <div class="q-block">
+      <div class="q-block-header">
+        <div class="q-block-title">Part 5 — Multiple choice</div>
+        <div class="q-block-subtitle">Read the article then choose the best answer (A, B, C or D) for questions 31–36.</div>
+      </div>
+      <div class="q-block-body">
+        <div class="passage-card">
+          <h3>Living with less</h3>
+          <p>Over the last decade, tiny houses have attracted growing attention in many parts of the world. These homes, often no bigger than a single room or small studio flat, are designed to contain only the essentials. To some people, the idea sounds uncomfortable or unrealistic. To others, it represents freedom.</p>
+          <p>People choose tiny-house living for a range of reasons. Money is one of the most obvious. Smaller homes are generally cheaper to build, heat and maintain than conventional ones. This can allow owners to avoid large loans or reduce the amount of time they must spend earning money to cover household costs. But the decision is not always purely financial. Many are also attracted by the idea of a simpler life, with fewer possessions to organise, clean and replace.</p>
+          <p>This does not mean that tiny-house living is easy. In fact, one of its greatest challenges is psychological rather than practical. Most people are used to filling space. Give someone a cupboard, and they will soon find something to put in it. Tiny-house owners have to make constant decisions about what deserves space and what does not. As a result, living in a very small home can force people to question their habits as consumers. Did they really need five coats, three frying pans or shelves of objects they had barely noticed for years?</p>
+          <p>Even so, critics argue that tiny houses are sometimes treated too romantically. Pictures online often show beautifully designed interiors, clever storage systems and peaceful natural surroundings. What they rarely show is the inconvenience. A tiny house can feel charming on a weekend, but less so during a week of bad weather, illness or stress. Lack of privacy can also become a serious issue, especially for couples or families. A lifestyle that suits one person may be deeply frustrating for another.</p>
+          <p>There is also the question of whether tiny houses offer a real solution to broader housing problems. Supporters claim they could help provide cheaper homes and reduce environmental impact. However, experts point out that legal restrictions often limit where such homes can be built or parked. In some areas, regulations were written with traditional housing in mind, making tiny-house living difficult even for those who are fully committed to it.</p>
+          <p>Perhaps, then, the value of the tiny-house movement lies not in persuading everyone to adopt it, but in encouraging people to think more carefully about what they truly need from a home. A tiny house may not be the answer for most people. Yet the questions it raises about cost, consumption and comfort are relevant far beyond its walls.</p>
+        </div>
+        <div id="p5-questions"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PART 6 ═══ -->
+  <div class="q-section" id="p6">
+    <div class="section-score">
+      <span class="section-score-label">Part 6 · Gapped text · Questions 37–42</span>
+      <div class="section-score-bar"><div class="section-score-fill" id="p6-bar"></div></div>
+      <span class="section-score-num" id="p6-score">0 / 6</span>
+    </div>
+    <div class="q-block">
+      <div class="q-block-header">
+        <div class="q-block-title">Part 6 — Gapped text</div>
+        <div class="q-block-subtitle">Choose from sentences A–G the one which fits each gap. There is one extra sentence you do not need.</div>
+      </div>
+      <div class="q-block-body" id="p6-body"></div>
+    </div>
+  </div>
+
+  <!-- ═══ PART 7 ═══ -->
+  <div class="q-section" id="p7">
+    <div class="section-score">
+      <span class="section-score-label">Part 7 · Multiple matching · Questions 43–52</span>
+      <div class="section-score-bar"><div class="section-score-fill" id="p7-bar"></div></div>
+      <span class="section-score-num" id="p7-score">0 / 10</span>
+    </div>
+    <div class="q-block">
+      <div class="q-block-header">
+        <div class="q-block-title">Part 7 — Multiple matching</div>
+        <div class="q-block-subtitle">Read the four people's accounts. Then match each question to the correct person (A–D). People may be chosen more than once.</div>
+      </div>
+      <div class="q-block-body" id="p7-body"></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>B2 First · Reading &amp; Use of English Practice Test · <span style="color:var(--accent);">✓ Progress auto-saved</span> — your answers persist across page refreshes</footer>
+
+<script>
+// ══════════ PERSISTENCE ══════════
+const STORE_KEY = 'b2first_practice1_v1';
+function loadState() { try { const r=localStorage.getItem(STORE_KEY); return r?JSON.parse(r):{}; } catch(e) { return {}; } }
+function saveState(p) { try { const c=loadState(); localStorage.setItem(STORE_KEY,JSON.stringify({...c,...p})); } catch(e) {} }
+function clearState() { try { localStorage.removeItem(STORE_KEY); } catch(e) {} }
+
+// ══════════ SCORES ══════════
+const partTotals = { p1:8, p2:8, p3:8, p4:6, p5:6, p6:6, p7:10 };
+const partScores = { p1:0, p2:0, p3:0, p4:0, p5:0, p6:0, p7:0 };
+const partAnswered = { p1:new Set(), p2:new Set(), p3:new Set(), p4:new Set(), p5:new Set(), p6:new Set(), p7:new Set() };
+
+function updateScore(part, qId, correct) {
+  if (!partAnswered[part].has(qId)) { partAnswered[part].add(qId); if(correct) partScores[part]++; }
+  const pct = Math.round(partScores[part]/partTotals[part]*100);
+  document.getElementById(part+'-bar').style.width = pct+'%';
+  document.getElementById(part+'-score').textContent = partScores[part]+' / '+partTotals[part];
+  const total = Object.values(partTotals).reduce((a,b)=>a+b,0);
+  const score = Object.values(partScores).reduce((a,b)=>a+b,0);
+  document.getElementById('global-score').textContent = score+' / '+total;
+}
+
+// ══════════ PART 1 DATA & BUILD ══════════
+const p1Data = [
+  { n:1, opts:['access','approach','admission','entry'], correct:0, exp:"'access to gardens' is the correct collocation. You 'have access to' something, not 'approach to'." },
+  { n:2, opts:['persuaded','inspired','attracted','encouraged'], correct:3, exp:"'encouraged others to start' — encouraged + to-infinitive is the correct pattern here. 'Inspired' could work but 'encouraged' fits better with the idea of motivating behaviour." },
+  { n:3, opts:['disappointed','offended','guilty','ashamed'], correct:0, exp:"'feel disappointed when a plant dies' — disappointed fits the context of unmet expectations." },
+  { n:4, opts:['attempts','experiments','efforts','trials'], correct:0, exp:"'failed attempts' is the natural collocation. You make 'attempts' at something." },
+  { n:5, opts:['give','pay','keep','hold'], correct:1, exp:"'pay attention to' is the fixed phrase. You cannot 'give' or 'keep' attention in this construction." },
+  { n:6, opts:['expand','spread','increase','grow'], correct:3, exp:"'this trend has continued to grow' — 'grow' is the most natural verb for a trend developing." },
+  { n:7, opts:['feature','piece','side','element'], correct:0, exp:"'a lasting feature of everyday life' — 'feature' collocates with 'of life' to describe something characteristic." },
+  { n:8, opts:['stay','continue','remain','keep'], correct:2, exp:"'remain a popular choice' — 'remain' + noun phrase/adjective is the correct structure here." },
+];
+
+function buildP1() {
+  const c = document.getElementById('p1-questions');
+  p1Data.forEach(q => {
+    const div = document.createElement('div'); div.className = 'question-item';
+    const opts = q.opts.map((o,i)=>`<button class="mcq-opt" onclick="answerMCQ(this,${i},${q.correct},'p1',${q.n})" data-idx="${i}"><span class="opt-letter">${String.fromCharCode(65+i)}</span>${o}</button>`).join('');
+    div.innerHTML = `<div class="q-number">Question ${q.n}</div><div class="mcq-options" data-qi="p1-${q.n}">${opts}</div><div class="q-feedback" id="fb-p1-${q.n}"></div>`;
+    c.appendChild(div);
+  });
+}
+
+// ══════════ PART 2 DATA & BUILD ══════════
+const p2Data = [
+  { n:9, before:"can offer a very different experience", after:"the first time through.", answer:"from", hint:"'different from' — preposition after 'different'." },
+  { n:10, before:"may suddenly appear full", after:"meaning.", answer:"of", hint:"'full of meaning' — fixed preposition." },
+  { n:11, before:"allows people to focus less", after:"the plot", answer:"on", hint:"'focus on' — preposition after 'focus'." },
+  { n:12, before:"it does not mean rereading is", after:"value.", answer:"without", hint:"'is without value' — means it has no value." },
+  { n:13, before:"the books seem to change along", after:"them.", answer:"with", hint:"'along with them' — alongside the reader." },
+  { n:14, before:"may produce quite", after:".", answer:"another", hint:"'quite another' (impression) — meaning a very different one." },
+  { n:15, before:"a way of seeing both the book and oneself", after:"clearly.", answer:"more", hint:"'more clearly' — comparative adverb." },
+  { n:16, before:"it can be one of the most rewarding ways", after:"enjoy literature.", answer:"to", hint:"'ways to enjoy' — infinitive of purpose." },
+];
+
+function buildP2() {
+  const c = document.getElementById('p2-body');
+  const passageDiv = document.createElement('div'); passageDiv.className = 'passage-card';
+  passageDiv.innerHTML = `<h3>The art of rereading</h3>
+    <p>Many people assume that once they have finished a book, there is no reason to read it again. After all, they already know what happens. Yet rereading can offer a very different experience <span class="inline-gap"><input class="inline-input" id="oc-9" placeholder="(9)" autocomplete="off" spellcheck="false" style="width:80px;"></span> the first time through.</p>
+    <p>When readers return to a novel, they often notice details that they had missed before. A conversation that once seemed unimportant may suddenly appear full <span class="inline-gap"><input class="inline-input" id="oc-10" placeholder="(10)" autocomplete="off" spellcheck="false" style="width:70px;"></span> meaning. Characters can also seem more complex when the reader already knows how their story will end.</p>
+    <p>Another advantage is that rereading allows people to focus less <span class="inline-gap"><input class="inline-input" id="oc-11" placeholder="(11)" autocomplete="off" spellcheck="false" style="width:70px;"></span> the plot and more on the writer's style. During a first reading, much attention is given to what will happen next. The second time, however, there is usually less suspense, so the reader is free to admire the language, structure and atmosphere.</p>
+    <p>Of course, not everyone enjoys rereading. Some would rather spend their time discovering something new. That is a reasonable view, but it does not mean rereading is <span class="inline-gap"><input class="inline-input" id="oc-12" placeholder="(12)" autocomplete="off" spellcheck="false" style="width:90px;"></span> value. In fact, many readers return to certain books at different stages of life and find that the books seem to change along <span class="inline-gap"><input class="inline-input" id="oc-13" placeholder="(13)" autocomplete="off" spellcheck="false" style="width:70px;"></span> them.</p>
+    <p>This may be because readers themselves change. A novel read at the age of fifteen may create one impression, while the same novel read at thirty may produce quite <span class="inline-gap"><input class="inline-input" id="oc-14" placeholder="(14)" autocomplete="off" spellcheck="false" style="width:90px;"></span>. Life experience affects the way people interpret events, relationships and emotions.</p>
+    <p>For this reason, rereading is not simply repetition. It is often a way of seeing both the book and oneself <span class="inline-gap"><input class="inline-input" id="oc-15" placeholder="(15)" autocomplete="off" spellcheck="false" style="width:80px;"></span> clearly. Far from being a waste of time, it can be one of the most rewarding ways <span class="inline-gap"><input class="inline-input" id="oc-16" placeholder="(16)" autocomplete="off" spellcheck="false" style="width:70px;"></span> enjoy literature.</p>`;
+  c.appendChild(passageDiv);
+  const btn = document.createElement('button'); btn.className = 'check-all-btn'; btn.textContent = 'Check All Answers (9–16)'; btn.onclick = () => checkP2();
+  c.appendChild(btn);
+  const fb = document.createElement('div'); fb.className = 'q-feedback'; fb.id = 'p2-fb'; fb.style.marginTop = '8px'; c.appendChild(fb);
+}
+
+function checkP2() {
+  let correct = 0;
+  p2Data.forEach(q => {
+    const input = document.getElementById('oc-'+q.n); if (input.disabled) return;
+    const val = input.value.trim().toLowerCase();
+    const isRight = val === q.answer.toLowerCase();
+    input.classList.remove('correct','wrong'); input.classList.add(isRight?'correct':'wrong'); input.disabled = true;
+    if (!isRight) { const sp=document.createElement('span');sp.className='answer-reveal';sp.style.display='inline-block';sp.style.marginLeft='4px';sp.style.fontSize='11px';sp.textContent=q.answer;input.parentNode.appendChild(sp); }
+    if (isRight) correct++;
+    updateScore('p2', q.n, isRight);
+    saveState({[`p2_${q.n}`]:{value:input.value.trim(),isRight}});
+  });
+  const fb = document.getElementById('p2-fb');
+  fb.className = 'q-feedback show '+(correct===8?'correct':'wrong');
+  fb.textContent = correct===8?'✓ All 8 correct!':correct+'/8 correct. Incorrect answers are shown in red with the correct word beside them.';
+  saveState({p2_checked:true});
+}
+
+// ══════════ PART 3 DATA & BUILD ══════════
+const p3Data = [
+  { n:17, before:"learning to cook begins as a matter of", after:"rather than interest.", root:"NECESSARY", answer:"necessity", hint:"noun form of NECESSARY" },
+  { n:18, before:"preparing meals is not as", after:"as it looked", root:"SIMPLE", answer:"simple", hint:"SIMPLE itself is already an adjective — no change needed." },
+  { n:19, before:"early results are not always", after:".", root:"SUCCESS", answer:"successful", hint:"adjective form: SUCCESS → successful" },
+  { n:20, before:"cooking can become both useful and enjoyable… a greater degree of", after:".", root:"DEPEND", answer:"independence", hint:"noun with negative prefix: DEPEND → independence" },
+  { n:21, before:"There is room for", after:", especially once someone becomes confident", root:"ORIGINAL", answer:"originality", hint:"abstract noun: ORIGINAL → originality" },
+  { n:22, before:"preparing food for other people can be surprisingly", after:".", root:"SATISFY", answer:"satisfying", hint:"adjective form: SATISFY → satisfying" },
+  { n:23, before:"What begins in", after:"often turns into something people take real pride in.", root:"CERTAIN", answer:"uncertainty", hint:"noun with negative prefix: CERTAIN → uncertainty" },
+  { n:24, before:"most can make clear", after:"with time and patience.", root:"IMPROVE", answer:"improvements", hint:"plural noun: IMPROVE → improvements" },
+];
+
+function buildP3() {
+  const c = document.getElementById('p3-body');
+  const intro = document.createElement('div'); intro.className = 'passage-card';
+  intro.innerHTML = '<h3>Learning to cook</h3><p style="font-size:13px;color:var(--ink-muted);margin-bottom:0;">Type the correct form of each word in CAPITALS. Click Check below when ready.</p>';
+  c.appendChild(intro);
+  p3Data.forEach(q => {
+    const div = document.createElement('div'); div.className = 'wf-row';
+    div.innerHTML = `<span class="wf-num">${q.n}</span>
+      <span class="wf-sentence">${q.before} <span class="inline-gap"><input class="inline-input" id="wf-${q.n}" placeholder="…" autocomplete="off" spellcheck="false" style="width:150px;"></span> ${q.after}</span>
+      <span class="wf-root">${q.root}</span>`;
+    c.appendChild(div);
+  });
+  const btn = document.createElement('button'); btn.className = 'check-all-btn'; btn.textContent = 'Check All Answers (17–24)'; btn.onclick = () => checkP3();
+  c.appendChild(btn);
+  const fb = document.createElement('div'); fb.className = 'q-feedback'; fb.id = 'p3-fb'; fb.style.marginTop = '8px'; c.appendChild(fb);
+}
+
+function checkP3() {
+  let correct = 0;
+  p3Data.forEach(q => {
+    const input = document.getElementById('wf-'+q.n); if(input.disabled) return;
+    const val = input.value.trim().toLowerCase();
+    const isRight = val === q.answer.toLowerCase();
+    input.classList.remove('correct','wrong'); input.classList.add(isRight?'correct':'wrong'); input.disabled = true;
+    if (!isRight) { const sp=document.createElement('span');sp.className='answer-reveal';sp.style.display='inline-block';sp.style.marginLeft='4px';sp.style.fontSize='11px';sp.textContent=q.answer;input.parentNode.appendChild(sp); }
+    if (isRight) correct++;
+    updateScore('p3', q.n, isRight);
+    saveState({[`p3_${q.n}`]:{value:input.value.trim(),isRight}});
+  });
+  const fb = document.getElementById('p3-fb');
+  fb.className='q-feedback show '+(correct===8?'correct':'wrong');
+  fb.textContent = correct===8?'✓ All 8 correct!':correct+'/8 correct. Incorrect answers are shown in red with the correct word beside them.';
+  saveState({p3_checked:true});
+}
+
+// ══════════ PART 4 DATA & BUILD ══════════
+const p4Data = [
+  { n:25, s1:"I last went to the cinema three months ago.", keyword:"BEEN", s2_before:"I", s2_after:"to the cinema for three months.", answer:"haven't been", hint:"present perfect negative: I haven't been …" },
+  { n:26, s1:"It was unnecessary for Sam to bring food because we had already ordered enough.", keyword:"NEEDN'T", s2_before:"Sam", s2_after:"food because we had already ordered enough.", answer:"needn't have brought", hint:"needn't have + past participle" },
+  { n:27, s1:'"Why don\'t we go for a walk after lunch?" Marta said.', keyword:"SUGGESTED", s2_before:"Marta", s2_after:"for a walk after lunch.", answer:"suggested going", hint:"suggest + gerund (no 'that' needed)" },
+  { n:28, s1:"The hotel was so expensive that we decided not to stay there.", keyword:"TOO", s2_before:"The hotel was", s2_after:"decide to stay there.", answer:"too expensive for us to", hint:"too + adj + for + object + to-infinitive" },
+  { n:29, s1:"I regret not learning another language when I was younger.", keyword:"WISH", s2_before:"I", s2_after:"another language when I was younger.", answer:"wish I had learned", hint:"wish + past perfect for regret about the past" },
+  { n:30, s1:"People say that this restaurant serves the best pasta in town.", keyword:"SAID", s2_before:"This restaurant", s2_after:"the best pasta in town.", answer:"is said to serve", hint:"passive reporting structure: is said to + infinitive" },
+];
+
+function buildP4() {
+  const c = document.getElementById('p4-body');
+  p4Data.forEach(q => {
+    const div = document.createElement('div'); div.className = 'kw-item';
+    div.innerHTML = `<div class="kw-q-num">Question ${q.n}</div>
+      <div class="kw-sentence1">${q.s1}</div>
+      <span class="kw-keyword">${q.keyword}</span>
+      <div class="kw-sentence2">${q.s2_before} <input class="kw-input" id="kw-${q.n}" placeholder="2–5 words" autocomplete="off" spellcheck="false"> ${q.s2_after}</div>
+      <div class="answer-row" style="margin-top:8px;">
+        <button class="reveal-btn" onclick="checkKW(${q.n})">Check</button>
+        <span class="correct-badge" id="kwcb-${q.n}">✓ Correct</span>
+        <span class="wrong-badge" id="kwwb-${q.n}"></span>
+        <span class="answer-reveal" id="kwar-${q.n}">Answer: ${q.answer}</span>
+      </div>
+      <div class="q-feedback" id="kwfb-${q.n}" style="margin-top:5px;font-size:12px;"></div>`;
+    c.appendChild(div);
+  });
+}
+
+function checkKW(n) {
+  const q = p4Data.find(d=>d.n===n);
+  const input = document.getElementById('kw-'+n); if(input.disabled) return;
+  const val = input.value.trim().toLowerCase().replace(/\s+/g,' ');
+  // accept variants
+  const accepted = [q.answer.toLowerCase()];
+  if (n===25) accepted.push("have not been");
+  if (n===26) accepted.push("needn't have brought","need not have brought","didn't need to bring","did not need to bring");
+  if (n===27) accepted.push("suggested going","suggested that we go","suggested that we went");
+  if (n===28) accepted.push("too expensive for us to","too expensive to");
+  if (n===29) accepted.push("wish i had learned","wish i had learnt");
+  if (n===30) accepted.push("is said to serve");
+  const isRight = accepted.includes(val);
+  input.classList.remove('correct','wrong'); input.classList.add(isRight?'correct':'wrong'); input.disabled=true;
+  const cb=document.getElementById('kwcb-'+n),wb=document.getElementById('kwwb-'+n),ar=document.getElementById('kwar-'+n),fb=document.getElementById('kwfb-'+n);
+  if(isRight){cb.style.display='inline-block';fb.className='q-feedback show correct';fb.textContent='✓ Correct.';}
+  else{wb.style.display='inline-block';wb.textContent='✗ "'+input.value.trim()+'"';ar.style.display='inline-block';fb.className='q-feedback show wrong';fb.textContent='Hint: '+q.hint;}
+  updateScore('p4',n,isRight);
+  saveState({[`p4_${n}`]:{value:input.value.trim(),isRight}});
+}
+
+// ══════════ PART 5 DATA & BUILD ══════════
+const p5Data = [
+  { n:31, text:"What is the writer's main point in the first paragraph?",
+    opts:["Tiny houses are more popular in cities than in the countryside.","Tiny houses cause strong but differing reactions.","Most people misunderstand how tiny houses are built.","Tiny houses are only suitable for one person."],
+    correct:1, exp:"'To some people, the idea sounds uncomfortable or unrealistic. To others, it represents freedom.' — contrasting reactions are the main focus." },
+  { n:32, text:"According to the writer, people may choose tiny houses because they",
+    opts:["dislike doing household tasks.","want to avoid owning property.","hope to live more simply.","are unable to find larger homes."],
+    correct:2, exp:"'Many are also attracted by the idea of a simpler life, with fewer possessions to organise, clean and replace'." },
+  { n:33, text:"What does the writer suggest in paragraph 3 about living in a tiny house?",
+    opts:["It mainly requires advanced practical skills.","It can change the way people think about possessions.","It is easier for naturally tidy people.","It usually makes people more interested in design."],
+    correct:1, exp:"'Living in a very small home can force people to question their habits as consumers.' — it prompts reflection on possessions." },
+  { n:34, text:"Why does the writer mention 'bad weather, illness or stress' in paragraph 4?",
+    opts:["To show that tiny houses can be difficult in real life","To explain why tiny houses should only be used temporarily","To suggest that online photos of tiny houses are inaccurate","To prove that tiny houses are unhealthy places to live"],
+    correct:0, exp:"These examples show that charm fades 'during a week of bad weather, illness or stress' — real-life conditions make tiny houses harder." },
+  { n:35, text:"What problem does the writer identify in paragraph 5?",
+    opts:["Tiny houses are expensive to move","Tiny houses may not fit existing legal rules","Tiny houses are difficult to insure","Tiny houses require too much land"],
+    correct:1, exp:"'Legal restrictions often limit where such homes can be built or parked… regulations were written with traditional housing in mind'." },
+  { n:36, text:"What is the writer's overall attitude to tiny houses?",
+    opts:["Strongly enthusiastic about their future","Completely opposed to them as a housing idea","Interested in them, but aware of their limits","Uncertain whether they have any value at all"],
+    correct:2, exp:"The writer acknowledges benefits but consistently notes problems — 'A tiny house may not be the answer for most people. Yet the questions it raises… are relevant'." },
+];
+
+function buildP5() {
+  const c = document.getElementById('p5-questions');
+  p5Data.forEach(q => {
+    const div = document.createElement('div'); div.className='question-item';
+    const opts = q.opts.map((o,i)=>`<button class="mcq-opt" onclick="answerMCQ(this,${i},${q.correct},'p5',${q.n})"><span class="opt-letter">${String.fromCharCode(65+i)}</span>${o}</button>`).join('');
+    div.innerHTML=`<div class="q-number">Question ${q.n}</div><div class="q-text">${q.text}</div><div class="mcq-options" data-qi="p5-${q.n}">${opts}</div><div class="q-feedback" id="fb-p5-${q.n}"></div>`;
+    c.appendChild(div);
+  });
+}
+
+// ══════════ PART 6 DATA & BUILD ══════════
+const p6Sentences = {
+  A: "For that reason, choosing familiar songs can make practice more enjoyable.",
+  B: "As a result, some give up before they have allowed themselves enough time to improve.",
+  C: "In fact, many report finding the experience both demanding and deeply satisfying.",
+  D: "They may also be better at organising regular practice into busy schedules.",
+  E: "This does not mean, however, that adults are naturally more talented than children.",
+  F: "Instead, they are often pleased simply to have become competent listeners.",
+  G: "That is why looking back after a few months can be so encouraging.",
+};
+
+const p6Answers = { 37:'D', 38:'E', 39:'B', 40:'G', 41:'A', 42:'C' };
+
+const p6Explanations = {
+  37:"D fits — it continues the point about adults' motivation by adding another advantage: organising practice into schedules.",
+  38:"E fits — it concedes that adults being motivated doesn't mean they're naturally more talented, balancing the paragraph.",
+  39:"B fits — it explains the consequence of self-consciousness: giving up before improving.",
+  40:"G fits — it follows the advice to avoid missing small progress, suggesting looking back to see how far you've come.",
+  41:"A fits — it follows the idea that adults can choose music they love, suggesting familiar songs make practice more enjoyable.",
+  42:"C fits — it concludes by saying most find the experience demanding but satisfying, ending on a positive note.",
+};
+
+function buildP6() {
+  const c = document.getElementById('p6-body');
+
+  // Sentence bank
+  const bankDiv = document.createElement('div'); bankDiv.className = 'sentence-bank';
+  bankDiv.innerHTML = '<div class="sentence-bank-title">Sentences A–G</div>' +
+    Object.entries(p6Sentences).map(([k,v])=>`<div style="font-size:13px;color:var(--ink-soft);margin-bottom:4px;line-height:1.65;"><strong style="color:var(--ink);font-weight:600;">${k}</strong> ${v}</div>`).join('');
+  c.appendChild(bankDiv);
+
+  // Article with dropdowns
+  const articleDiv = document.createElement('div'); articleDiv.className = 'passage-card';
+  const paraTexts = [
+    `Many people believe that musical skill must be developed in childhood. If someone has not learned the piano or violin by the age of ten, they may assume the opportunity has passed. Yet increasing numbers of adults are now choosing to learn instruments for the first time.`,
+    `One reason is that adults often approach learning differently from children. They are usually making the choice voluntarily, not because a parent has insisted on lessons. This can result in stronger motivation, even if progress is slower at first.`,
+    `At the same time, adult learners may face difficulties that children do not. A child might practise without worrying too much about sounding terrible, but adults can be highly self-conscious. They may compare themselves with experienced players and feel embarrassed by their mistakes.`,
+    `Teachers who work with adult beginners often say that patience matters more than speed. Learning an instrument involves training the ear, memory and muscles together, and this takes time at any age. Small signs of improvement can be easy to miss unless learners deliberately notice them.`,
+    `Another advantage adults have is that they often know exactly what kind of music they love. A teenager may accept whatever pieces a teacher chooses, but adults can shape their learning around music that genuinely matters to them.`,
+    `Of course, very few adult beginners expect to become professional musicians. For most, that is not the point. The real reward lies in concentration, expression and the pleasure of gradually doing something that once seemed impossible. In many cases, starting late makes the achievement feel even more meaningful.`,
+  ];
+  const gapNums = [37,38,39,40,41,42];
+  const opts = ['A','B','C','D','E','F','G'].map(k=>`<option value="${k}">${k}</option>`).join('');
+  articleDiv.innerHTML = '<h3>Starting music later in life</h3>' +
+    paraTexts.map((t,i) => `<p>${t} <span style="vertical-align:middle;"> <select class="match-dropdown" id="p6sel-${gapNums[i]}" style="min-width:70px;"><option value="">—</option>${opts}</select></span></p>`).join('');
+  c.appendChild(articleDiv);
+
+  // Check button
+  const btn = document.createElement('button'); btn.className='check-all-btn'; btn.textContent='Check All Answers (37–42)'; btn.onclick=()=>checkP6();
+  c.appendChild(btn);
+  const fb = document.createElement('div'); fb.className='q-feedback'; fb.id='p6-fb'; fb.style.marginTop='8px'; c.appendChild(fb);
+
+  // Per-item feedback
+  gapNums.forEach(n=>{
+    const fdiv=document.createElement('div'); fdiv.className='q-feedback'; fdiv.id='p6-fb-'+n; fdiv.style.marginTop='3px';
+    c.appendChild(fdiv);
+  });
+}
+
+function checkP6() {
+  let correct=0;
+  [37,38,39,40,41,42].forEach(n=>{
+    const sel=document.getElementById('p6sel-'+n); if(sel.disabled)return;
+    const val=sel.value; if(!val)return;
+    const isRight=val===p6Answers[n]; sel.classList.add(isRight?'correct':'wrong'); sel.disabled=true;
+    const fd=document.getElementById('p6-fb-'+n);
+    fd.className='q-feedback show '+(isRight?'correct':'wrong');
+    fd.textContent=(isRight?'✓ ':' ✗ Correct answer: '+p6Answers[n]+'. ')+p6Explanations[n];
+    if(isRight)correct++;
+    updateScore('p6',n,isRight);
+    saveState({[`p6_${n}`]:{val,isRight}});
+  });
+  const fb=document.getElementById('p6-fb');
+  fb.className='q-feedback show '+(correct===6?'correct':'wrong');
+  fb.textContent=correct===6?'✓ All 6 correct!':correct+'/6 correct. Explanations shown for each gap above.';
+  saveState({p6_checked:true});
+}
+
+// ══════════ PART 7 DATA & BUILD ══════════
+const people = {
+  A: { name:'Nina', text:`I started running after moving to a new town for work. I did not know many people there, and my evenings felt strangely empty. At first I ran alone, but I found it hard to stay motivated, especially in winter. I joined the local club mainly to make sure I kept going, and that part definitely worked. What I had not expected was how quickly the runs became the centre of my week socially as well as physically. I had assumed clubs like this were full of serious athletes discussing race times. In reality, there were people of every age and speed, and nobody seemed bothered by where I finished.` },
+  B: { name:'Omar', text:`For me, the club solved a simple problem: I wanted to exercise before work, but I knew that if I relied only on my own willpower, I would keep pressing the alarm button and staying in bed. The club meets at 6:30 every Tuesday and Thursday, which means I treat it almost like an appointment. That structure changed everything. I am still not especially fast, and I do not care much about entering competitions. What I like is seeing that distances which once felt impossible now seem normal. It is satisfying to notice progress without feeling that I always need to beat someone.` },
+  C: { name:'Laura', text:`I used to think running clubs were probably a bit unfriendly. I imagined everyone would already know one another and that beginners would be ignored. I was completely wrong. On my first evening, two members stayed with me the whole time and made conversation so naturally that I forgot to feel nervous. I had recently stopped playing team sport because of a knee problem, and I missed the feeling of exercising with other people. Running with the club gave that back to me, even though it was very different from what I had done before.` },
+  D: { name:'Ben', text:`I joined because a friend kept inviting me, and I eventually ran out of excuses. Before that, I had always exercised on my own and felt quite satisfied with that arrangement. But after a few weeks with the club, I realised how much easier it was to push myself in a group than when nobody else was around. There is a relaxed atmosphere, but people still encourage one another to do their best. I also like the fact that the club includes complete beginners and very experienced runners together. I had thought that mixing abilities might be awkward, yet somehow it works extremely well.` },
+};
+
+const p7Questions = [
+  { n:43, text:"joined partly because they wanted company while exercising?", answer:"A", exp:"Nina 'joined the local club mainly to make sure I kept going' — but also for company: 'evenings felt strangely empty'." },
+  { n:44, text:"was surprised that the club suited people of different levels?", answer:"A", exp:"Nina 'had assumed clubs like this were full of serious athletes… In reality, there were people of every age and speed'." },
+  { n:45, text:"mentions enjoying improvement without becoming highly competitive?", answer:"B", exp:"Omar: 'It is satisfying to notice progress without feeling that I always need to beat someone'." },
+  { n:46, text:"originally had doubts because of a mistaken assumption?", answer:"C", exp:"Laura 'used to think running clubs were probably a bit unfriendly… I was completely wrong'." },
+  { n:47, text:"values the social side more now than they expected to?", answer:"A", exp:"Nina: 'What I had not expected was how quickly the runs became the centre of my week socially'." },
+  { n:48, text:"joined after a change in personal circumstances?", answer:"C", exp:"Laura 'had recently stopped playing team sport because of a knee problem'." },
+  { n:49, text:"appreciated the encouraging attitude of other members?", answer:"D", exp:"Ben: 'people still encourage one another to do their best'." },
+  { n:50, text:"says the club helped make exercise a regular habit?", answer:"B", exp:"Omar: 'I treat it almost like an appointment. That structure changed everything'." },
+  { n:51, text:"prefers the club to exercising alone?", answer:"D", exp:"Ben 'had always exercised on my own… realised how much easier it was to push myself in a group'." },
+  { n:52, text:"chose the club because it fitted a practical need in daily life?", answer:"B", exp:"Omar: the club 'solved a simple problem' — exercising before work without relying on willpower." },
+];
+
+function buildP7() {
+  const c = document.getElementById('p7-body');
+  // People cards
+  const grid = document.createElement('div'); grid.className = 'person-cards';
+  Object.entries(people).forEach(([k,p])=>{
+    const card = document.createElement('div'); card.className='person-card';
+    card.innerHTML=`<div class="person-card-header"><div class="person-card-name">${k} — ${p.name}</div></div><div class="person-card-body">${p.text}</div>`;
+    grid.appendChild(card);
+  });
+  c.appendChild(grid);
+
+  // Questions grid
+  const qgrid = document.createElement('div'); qgrid.className='mm-grid';
+  p7Questions.forEach(q=>{
+    const div=document.createElement('div'); div.className='mm-item';
+    const opts=['A','B','C','D'].map(l=>`<option value="${l}">${l}</option>`).join('');
+    div.innerHTML=`<div class="mm-q"><strong>${q.n}</strong> Which person ${q.text}</div>
+      <div class="answer-row">
+        <select class="match-dropdown" id="mm-${q.n}"><option value="">—</option>${opts}</select>
+        <button class="reveal-btn" onclick="checkMM(${q.n})">Check</button>
+        <span class="correct-badge" id="mmcb-${q.n}">✓ Correct</span>
+        <span class="wrong-badge" id="mmwb-${q.n}"></span>
+        <span class="answer-reveal" id="mmar-${q.n}">Answer: ${q.answer}</span>
+      </div>
+      <div class="q-feedback" id="mmfb-${q.n}" style="margin-top:4px;font-size:11.5px;"></div>`;
+    qgrid.appendChild(div);
+  });
+  c.appendChild(qgrid);
+}
+
+function checkMM(n) {
+  const q=p7Questions.find(d=>d.n===n);
+  const sel=document.getElementById('mm-'+n); if(sel.disabled)return;
+  const val=sel.value; if(!val)return;
+  const isRight=val===q.answer; sel.classList.add(isRight?'correct':'wrong'); sel.disabled=true;
+  const cb=document.getElementById('mmcb-'+n),wb=document.getElementById('mmwb-'+n),ar=document.getElementById('mmar-'+n),fb=document.getElementById('mmfb-'+n);
+  if(isRight){cb.style.display='inline-block';fb.className='q-feedback show correct';fb.textContent='✓ '+q.exp;}
+  else{wb.textContent='✗ '+val;wb.style.display='inline-block';ar.style.display='inline-block';fb.className='q-feedback show wrong';fb.textContent='✗ '+q.exp;}
+  updateScore('p7',n,isRight);
+  saveState({[`p7_${n}`]:{val,isRight}});
+}
+
+// ══════════ SHARED MCQ ══════════
+function answerMCQ(btn,idx,correct,part,qNum) {
+  const wrap=btn.closest('.mcq-options');
+  if(wrap.querySelector('.correct,.wrong'))return;
+  const btns=wrap.querySelectorAll('.mcq-opt'); btns.forEach(b=>b.disabled=true);
+  const isRight=idx===correct;
+  btn.classList.add(isRight?'correct':'wrong'); btns[correct].classList.add('correct');
+  const data=(part==='p1'?p1Data:p5Data).find(q=>q.n===qNum);
+  const fb=document.getElementById(`fb-${part}-${qNum}`);
+  fb.className='q-feedback show '+(isRight?'correct':'wrong');
+  fb.textContent=isRight?'✓ Correct. '+data.exp:'✗ Incorrect. '+data.exp;
+  updateScore(part,qNum,isRight);
+  saveState({[`mcq_${part}_${qNum}`]:{chosen:idx,correct,isRight}});
+}
+function restoreMCQ_general(part,qNum,chosen,correct,isRight) {
+  const wrap=document.querySelector(`[data-qi="${part}-${qNum}"]`); if(!wrap)return;
+  const btns=wrap.querySelectorAll('.mcq-opt'); btns.forEach(b=>b.disabled=true);
+  btns[chosen].classList.add(isRight?'correct':'wrong'); btns[correct].classList.add('correct');
+  const data=(part==='p1'?p1Data:p5Data).find(q=>q.n===qNum);
+  const fb=document.getElementById(`fb-${part}-${qNum}`);
+  fb.className='q-feedback show '+(isRight?'correct':'wrong');
+  fb.textContent=isRight?'✓ Correct. '+data.exp:'✗ Incorrect. '+data.exp;
+  updateScore(part,qNum,isRight);
+}
+
+// ══════════ PART SWITCHING ══════════
+function showPart(id, btn) {
+  document.querySelectorAll('.q-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  saveState({activePart:id});
+}
+
+// ══════════ TIMER ══════════
+const timerEl=document.getElementById('timer');
+const st0=loadState();
+let secondsLeft=(st0.timerSeconds!==undefined&&st0.timerSeconds>0)?st0.timerSeconds:75*60;
+function renderTimer(){
+  const m=Math.floor(secondsLeft/60),s=secondsLeft%60;
+  timerEl.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  timerEl.className='hval lg'+(secondsLeft<600?' danger':secondsLeft<1200?' warning':'');
+}
+renderTimer();
+const tick=setInterval(()=>{
+  if(secondsLeft<=0){clearInterval(tick);timerEl.textContent='00:00';timerEl.classList.add('danger');return;}
+  secondsLeft--;renderTimer();
+  if(secondsLeft%10===0)saveState({timerSeconds:secondsLeft});
+},1000);
+
+// ══════════ RESET ══════════
+function resetTest(){
+  if(!confirm('Reset the entire test? All your answers and the timer will be cleared.'))return;
+  clearState();location.reload();
+}
+
+// ══════════ RESTORE ══════════
+function restoreAll(){
+  const st=loadState();
+
+  // P1 MCQ
+  p1Data.forEach(q=>{const s=st[`mcq_p1_${q.n}`];if(s)restoreMCQ_general('p1',q.n,s.chosen,s.correct,s.isRight);});
+
+  // P2 open cloze
+  p2Data.forEach(q=>{
+    const s=st[`p2_${q.n}`]; if(!s)return;
+    const input=document.getElementById('oc-'+q.n); if(!input)return;
+    input.value=s.value; input.classList.add(s.isRight?'correct':'wrong'); input.disabled=true;
+    if(!s.isRight){const sp=document.createElement('span');sp.className='answer-reveal';sp.style.display='inline-block';sp.style.marginLeft='4px';sp.style.fontSize='11px';sp.textContent=q.answer;input.parentNode.appendChild(sp);}
+    updateScore('p2',q.n,s.isRight);
+  });
+  if(st.p2_checked){const fb=document.getElementById('p2-fb');const correct=p2Data.filter(q=>{ const s=st[`p2_${q.n}`];return s&&s.isRight;}).length;fb.className='q-feedback show '+(correct===8?'correct':'wrong');fb.textContent=correct===8?'✓ All 8 correct!':correct+'/8 correct. Incorrect answers are shown in red with the correct word beside them.';}
+
+  // P3 word formation
+  p3Data.forEach(q=>{
+    const s=st[`p3_${q.n}`]; if(!s)return;
+    const input=document.getElementById('wf-'+q.n); if(!input)return;
+    input.value=s.value; input.classList.add(s.isRight?'correct':'wrong'); input.disabled=true;
+    if(!s.isRight){const sp=document.createElement('span');sp.className='answer-reveal';sp.style.display='inline-block';sp.style.marginLeft='4px';sp.style.fontSize='11px';sp.textContent=q.answer;input.parentNode.appendChild(sp);}
+    updateScore('p3',q.n,s.isRight);
+  });
+  if(st.p3_checked){const fb=document.getElementById('p3-fb');const correct=p3Data.filter(q=>{const s=st[`p3_${q.n}`];return s&&s.isRight;}).length;fb.className='q-feedback show '+(correct===8?'correct':'wrong');fb.textContent=correct===8?'✓ All 8 correct!':correct+'/8 correct. Incorrect answers are shown in red with the correct word beside them.';}
+
+  // P4 key word
+  p4Data.forEach(q=>{
+    const s=st[`p4_${q.n}`]; if(!s)return;
+    const input=document.getElementById('kw-'+q.n); if(!input)return;
+    input.value=s.value; input.classList.add(s.isRight?'correct':'wrong'); input.disabled=true;
+    const cb=document.getElementById('kwcb-'+q.n),wb=document.getElementById('kwwb-'+q.n),ar=document.getElementById('kwar-'+q.n),fb=document.getElementById('kwfb-'+q.n);
+    if(s.isRight){cb.style.display='inline-block';fb.className='q-feedback show correct';fb.textContent='✓ Correct.';}
+    else{wb.style.display='inline-block';wb.textContent='✗ "'+s.value+'"';ar.style.display='inline-block';fb.className='q-feedback show wrong';fb.textContent='Hint: '+q.hint;}
+    updateScore('p4',q.n,s.isRight);
+  });
+
+  // P5 MCQ
+  p5Data.forEach(q=>{const s=st[`mcq_p5_${q.n}`];if(s)restoreMCQ_general('p5',q.n,s.chosen,s.correct,s.isRight);});
+
+  // P6 gapped text
+  [37,38,39,40,41,42].forEach(n=>{
+    const s=st[`p6_${n}`]; if(!s)return;
+    const sel=document.getElementById('p6sel-'+n); if(!sel)return;
+    sel.value=s.val; sel.classList.add(s.isRight?'correct':'wrong'); sel.disabled=true;
+    const fd=document.getElementById('p6-fb-'+n);
+    fd.className='q-feedback show '+(s.isRight?'correct':'wrong');
+    fd.textContent=(s.isRight?'✓ ':' ✗ Correct answer: '+p6Answers[n]+'. ')+p6Explanations[n];
+    updateScore('p6',n,s.isRight);
+  });
+  if(st.p6_checked){const correct=[37,38,39,40,41,42].filter(n=>{const s=st[`p6_${n}`];return s&&s.isRight;}).length;const fb=document.getElementById('p6-fb');fb.className='q-feedback show '+(correct===6?'correct':'wrong');fb.textContent=correct===6?'✓ All 6 correct!':correct+'/6 correct. Explanations shown for each gap above.';}
+
+  // P7 matching
+  p7Questions.forEach(q=>{
+    const s=st[`p7_${q.n}`]; if(!s)return;
+    const sel=document.getElementById('mm-'+q.n); if(!sel)return;
+    sel.value=s.val; sel.classList.add(s.isRight?'correct':'wrong'); sel.disabled=true;
+    const cb=document.getElementById('mmcb-'+q.n),wb=document.getElementById('mmwb-'+q.n),ar=document.getElementById('mmar-'+q.n),fb=document.getElementById('mmfb-'+q.n);
+    if(s.isRight){cb.style.display='inline-block';fb.className='q-feedback show correct';fb.textContent='✓ '+q.exp;}
+    else{wb.textContent='✗ '+s.val;wb.style.display='inline-block';ar.style.display='inline-block';fb.className='q-feedback show wrong';fb.textContent='✗ '+q.exp;}
+    updateScore('p7',q.n,s.isRight);
+  });
+
+  // Restore active part
+  const ap=st.activePart;
+  if(ap&&ap!=='p1'){const tabs=document.querySelectorAll('.ptab');const parts=['p1','p2','p3','p4','p5','p6','p7'];const idx=parts.indexOf(ap);if(idx>=0&&tabs[idx])showPart(ap,tabs[idx]);}
+}
+
+// ══════════ INIT ══════════
+buildP1(); buildP2(); buildP3(); buildP4(); buildP5(); buildP6(); buildP7();
+restoreAll();
+</script>
+</body>
+</html>
